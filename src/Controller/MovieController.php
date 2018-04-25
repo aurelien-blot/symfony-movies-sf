@@ -2,25 +2,41 @@
 
 namespace App\Controller;
 
+use App\Entity\Movie;
+use App\Entity\Review;
+use App\Repository\MovieRepository;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Response;
 
 class MovieController extends Controller
 {
     /**
-     * @Route("/movie", name="movie")
+     * @Route("/", name="home")
      */
-    public function index()
+    public function home()
     {
-        return new Response('caca');
+        $movieRep = $this->getDoctrine()->getRepository(Movie::class);
+        //$movies = $movieRep->findAll();
+        $movies = $movieRep->findBy([], ["rating" => "DESC"], 50);
+
+        return $this->render("movie/home.html.twig", ["movies" => $movies]);
     }
 
     /**
      * @Route("/movie/{id}", name="movie_detail", requirements={ "id": "\d+" })
      */
+    //public function detail(Movie $movie){
     public function detail(int $id){
-    	return new Response('page detail ' . $id);
+
+        $movieRep = $this->getDoctrine()->getRepository(Movie::class);
+        // $movie = $movieRep->find($id);
+        $movie = $movieRep->findOneBy( ["id" => $id]);
+        //var_dump($movie);
+
+        $reviewRep = $this->getDoctrine()->getRepository(Review::class);
+        $reviews = $reviewRep->findBy(["id" => $id]);
+
+        return $this->render("movie/detail.html.twig", [ "id" => 3 , "movie" => $movie ]);
     }
 }
 

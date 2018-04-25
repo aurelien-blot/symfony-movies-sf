@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Super titre.{% endblock %}</title>
+        {% block head %}{% endblock %}
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}" />
+    </head>
+    <body>
+        <div class="container">
+            <header>
+                <nav>
+                    <ul>
+                        <li><a href="{{ path('home') }}">Home</a></li>
+                        <li><a href="{{ path('movie_detail', {"id": 123} ) }}">Détail</a></li>
+                    </ul>
+                    {% block links %}{% endblock %}
+                </nav>
+            </header>
+            <main>
+                {% block body %}{% endblock %}
+            </main>
+            <footer>
+
+            </footer>
+        </div>
+    </body>
+</html>

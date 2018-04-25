@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <h1>Accueil</h1>
+    <div class="posters">
+    {% for movie in movies %}
+        <div class="poster">
+            <a href="{{ path( 'movie_detail', { "id": movie.id } ) }}">
+                <img src="/posters/{{ movie.getImage() }}" />
+            </a>
+
+        </div>
+    {% endfor %}
+    </div>
+{% endblock %}
+
+{% block title %}Titre génial{% endblock %}

@@ -1,0 +1,57 @@
+body{
+	background-color:	#000000;
+	color: 	#FFFFFF;
+}
+
+.poster{
+	width:	200px;
+	height:	300px;
+	display: block;
+}
+
+.poster img{
+	width:	100%;
+}
+
+.posters{
+	display:	flex;
+	flex-wrap: 	wrap;
+	justify-content: space-evenly;
+}
+.twocol{
+	display:	flex;
+	justify-content: space-evenly;
+	flex-wrap: 	wrap;
+	flex-direction: row;
+}
+iframe{
+	align-self: center;
+}
+.embed{
+	display:	flex;
+	justify-content: space-evenly;
+	flex-wrap: 	wrap;
+}
+.full_poster{
+	width:	290px;
+}
+.text_container{
+	width:	600px;
+}
+
+label{
+	display:block;
+}
+input, textarea, button{
+	padding : 5px;
+	width:200px;
+}
+.flash-notice{
+	background-color:	green;
+}
+form li{
+	margin:0;
+	padding:0;
+	list-style-type: none;
+	color:	red;
+}

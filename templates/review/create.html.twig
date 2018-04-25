@@ -1,0 +1,7 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <h2>Pouet</h2>
+    {{ form(form, {"attr": {"novalidate" : "novalidate"}}) }}
+
+    <a href="{{ path("movie_detail", {'id': id}) }}">Go to movie details</a>
+{% endblock %}

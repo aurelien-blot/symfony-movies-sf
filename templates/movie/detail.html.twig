@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détail de {{ movie.title }}{% endblock %}
+
+
+{% block body %}
+    {# {{  }} correspond à des var symfony #}
+    {% if id > 500 %}
+
+    {% else %}
+
+    {% endif %}
+
+    {# Créer variable #}
+    {% set colors = ["blue", "red", "caca"] %}
+
+    {# | filtre #}
+    {% for color in colors %}
+        {# {{ color|upper }} #}
+        {# {{ color|length }} #}
+    {% endfor %}
+
+    {# you can read and display just one flash message type... #}
+    {% for message in app.flashes('success') %}
+        <div class="flash-notice">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    <div class='twocol'>
+        <div>
+            <img class="full_poster" src="{{ asset('/posters/' ~ movie.getImage()) }}" />
+        </div>
+        <div>
+            <div class="text_container">
+                <div><h3>{{ movie.title }} directed by {{ movie.directors }}</h3></div>
+                <div><h4>{{ movie.year }} - {{ movie.genres }} - {{ movie.actors }}</h4></div>
+                <div><p>{{ movie.plot }}</p></div>
+
+            </div>
+            {% if movie.trailerId != null %}
+            <div class="embed">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/{{ movie.trailerId }}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            </div>
+            {% endif %}
+            <div><p>{{ movie.dateCreated|date("d-m-Y") }}</p></div>
+        </div>
+    </div>
+
+    <a href="{{ path("review_create", {'id': movie.id}) }}">Review me.</a>
+{% endblock %}
+
