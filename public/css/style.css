@@ -55,9 +55,10 @@ form li{
 	list-style-type: none;
 	color:	red;
 }
-.comment{
+.review{
 	margin : 10px 0;
-
+	padding : 5px;
+	background-color : #222222;
 }
 header ul{
 

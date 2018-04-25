@@ -46,17 +46,17 @@
             <!--<div><p>{{ movie.dateCreated|date("d-m-Y") }}</p></div>-->
         </div>
     </div>
-    {% if reviews|length > 0 %}
-    <div class="comments">
+    <div class="reviews">
         <h2>Reviews</h2>
-        {% for review in reviews %}
-            <div class="comment">
+        {% for review in movie.reviews %}
+            <div class="review">
                 <div>{{ review.content }}</div>
-                <div>review postée par {{ review.username }}</div>
+                <div>Review postée par {{ review.username }}</div>
             </div>
+        {% else %}
+            <div>Pas encore de Review postée !</div>
         {% endfor %}
     </div>
-    {% endif %}
 
     <a href="{{ path("review_create", {'id': movie.id}) }}">Ajoutez vous aussi votre fanstastique review.</a>
 {% endblock %}
