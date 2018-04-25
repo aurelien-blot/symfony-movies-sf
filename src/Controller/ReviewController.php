@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Form\ReviewType;
 use App\Entity\Review;
+use App\Entity\Movie;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -22,6 +23,12 @@ class ReviewController extends Controller
 
         $review->setDateCreated(new \DateTime());
         if($form->isSubmitted() && $form->isValid()){
+            $movieRep = $this->getDoctrine()->getRepository(Movie::class);
+            //$movies = $movieRep->findAll();
+            $movie = $movieRep->findOneBy(["id" => $id]);
+
+            $review->setMovie($movie);
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($review);
             $em->flush();
@@ -32,7 +39,9 @@ class ReviewController extends Controller
 
         return $this->render("review/create.html.twig", [
             "form" => $form->createView(),
-            "id" => 3
+            "id" => $id
         ] );
+
+
     }
 }

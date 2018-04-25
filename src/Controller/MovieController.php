@@ -29,14 +29,15 @@ class MovieController extends Controller
     public function detail(int $id){
 
         $movieRep = $this->getDoctrine()->getRepository(Movie::class);
-        // $movie = $movieRep->find($id);
         $movie = $movieRep->findOneBy( ["id" => $id]);
         //var_dump($movie);
 
         $reviewRep = $this->getDoctrine()->getRepository(Review::class);
-        $reviews = $reviewRep->findBy(["id" => $id]);
+        $reviews = $reviewRep->findBy(["movie" => $movie]);
 
-        return $this->render("movie/detail.html.twig", [ "id" => 3 , "movie" => $movie ]);
+
+
+        return $this->render("movie/detail.html.twig", [ "id" => $id , "movie" => $movie, "reviews" => $reviews ]);
     }
 }
 

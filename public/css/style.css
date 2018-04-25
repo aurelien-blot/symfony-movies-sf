@@ -55,3 +55,15 @@ form li{
 	list-style-type: none;
 	color:	red;
 }
+.comment{
+	margin : 10px 0;
+
+}
+header ul{
+
+}
+header li{
+	list-style-type: none;
+	display: inline-block;
+
+}

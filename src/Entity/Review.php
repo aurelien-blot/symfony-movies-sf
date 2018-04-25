@@ -48,6 +48,12 @@ class Review
      */
     private $dateCreated;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Movie", inversedBy="reviews")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $movie;
+
     public function getId()
     {
         return $this->id;
@@ -97,6 +103,18 @@ class Review
     public function setDateCreated(\DateTimeInterface $dateCreated): self
     {
         $this->dateCreated = $dateCreated;
+
+        return $this;
+    }
+
+    public function getMovie(): ?Movie
+    {
+        return $this->movie;
+    }
+
+    public function setMovie(?Movie $movie): self
+    {
+        $this->movie = $movie;
 
         return $this;
     }
