@@ -9,13 +9,21 @@
     <body>
         <div class="container">
             <header>
-                <nav>
-                    <ul>
-                        <li><a href="{{ path('home') }}">Home</a></li>
-                        <li><a href="{{ path('movie_detail', {"id": 123} ) }}">Détail</a></li>
-                    </ul>
-                    {% block links %}{% endblock %}
-                </nav>
+                <div>
+                    <nav>
+                        <ul>
+                            <li><a href="{{ path('home') }}">Home</a></li>
+                            <li><a href="{{ path('movie_detail', {"id": 123} ) }}">Détail</a></li>
+                        </ul>
+                        {% block links %}{% endblock %}
+                    </nav>
+                </div>
+                <div>
+                    <form method="get" action="{{ path('home') }}">
+                        <input type="search" name="q" placeholder="Search"/>
+                        <button type="submit">OK</button>
+                    </form>
+                </div>
             </header>
             <main>
                 {% block body %}{% endblock %}

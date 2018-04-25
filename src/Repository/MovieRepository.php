@@ -19,6 +19,34 @@ class MovieRepository extends ServiceEntityRepository
         parent::__construct($registry, Movie::class);
     }
 
+    public function search(?string $q = null){
+        $qb = $this->createQueryBuilder("m");
+        if(!empty($q)){
+            $qb->andWhere(" m.title LIKE :q
+                        OR m.actors LIKE :q
+                        or m.directors LIKE :q");
+        }
+
+        $qb->addOrderBy("m.rating", "DESC");
+        $qb->leftJoin("m.reviews", "r");
+        $qb->addSelect('r');
+
+        $query = $qb->getQuery();
+
+        /*$dql = "SELECT m FROM App\Entity\Movie m
+                WHERE m.title LIKE :q 
+                OR m.actors LIKE :q 
+                or m.directors LIKE :q 
+                ORDER BY m.rating";
+
+        $query = $this->getEntityManager()->createQuery($dql);*/
+        $query->setParameter("q", "%".$q."%");
+        $query->setMaxResults(30);
+        $results = $query->getResult();
+
+        return $results;
+    }
+
 //    /**
 //     * @return Movie[] Returns an array of Movie objects
 //     */

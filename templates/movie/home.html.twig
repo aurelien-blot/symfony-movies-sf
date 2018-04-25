@@ -4,10 +4,12 @@
     <div class="posters">
     {% for movie in movies %}
         <div class="poster">
-            <a href="{{ path( 'movie_detail', { "id": movie.id } ) }}">
-                <img src="/posters/{{ movie.getImage() }}" />
-            </a>
-
+            <div>
+                <a href="{{ path( 'movie_detail', { "id": movie.id } ) }}">
+                    <img src="/posters/{{ movie.getImage() }}" />
+                </a>
+            </div>
+            <div>Review count : {{ movie.reviews|length }}</div>
         </div>
     {% endfor %}
     </div>
