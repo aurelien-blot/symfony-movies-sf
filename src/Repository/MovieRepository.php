@@ -19,6 +19,20 @@ class MovieRepository extends ServiceEntityRepository
         parent::__construct($registry, Movie::class);
     }
 
+    public function getMovieAndReviews(int $id){
+        $qb = $this->createQueryBuilder("m");
+        $qb->andWhere("m.id = :id");
+
+        $qb->leftJoin("m.reviews", "r");
+        $qb->addSelect('r');
+
+        $query = $qb->getQuery();
+        $query->setParameter("id", $id);
+        $result = $query->getResult();
+
+        return $result;
+    }
+
     public function search(?string $q = null){
         $qb = $this->createQueryBuilder("m");
         if(!empty($q)){
@@ -40,7 +54,9 @@ class MovieRepository extends ServiceEntityRepository
                 ORDER BY m.rating";
 
         $query = $this->getEntityManager()->createQuery($dql);*/
-        $query->setParameter("q", "%".$q."%");
+        if(!empty($q)) {
+            $query->setParameter("q", "%" . $q . "%");
+        }
         $query->setMaxResults(30);
         $results = $query->getResult();
 

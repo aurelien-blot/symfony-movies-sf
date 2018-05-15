@@ -8,7 +8,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ReviewRepository")
  */
-class Review
+class Review implements \JsonSerializable
 {
     /**
      * @ORM\Id()
@@ -117,5 +117,15 @@ class Review
         $this->movie = $movie;
 
         return $this;
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            "id"  =>  $this->getId(),
+            "username"   =>  $this->getUsername(),
+            "email"   =>  $this->getEmail(),
+            "content"    =>  $this->getContent()
+        ];
     }
 }
